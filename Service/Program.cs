@@ -1,3 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿var builder = WebApplication.CreateBuilder(args);
 
-Console.WriteLine("Hello, World!");
+builder.Services.AddControllers();
+
+var app = builder.Build();
+
+app.MapControllers();
+
+app.Run("http://localhost:39999");
