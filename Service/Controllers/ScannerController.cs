@@ -1,20 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Service.Responses;
+using Service.Services.Abstract;
 
 namespace Service.Controllers;
 
 [ApiController]
 [Route("[controller]/[action]")]
-public class SomeController
+public class ScannerController : ControllerBase
 {
-    [HttpGet]
-    public ActionResult Scan()
+    private readonly IScanTasksManager _scanTasksManager;
+
+    public ScannerController(IScanTasksManager scanTasksManager)
     {
-        throw new NotImplementedException();
+        _scanTasksManager = scanTasksManager;
     }
 
     [HttpGet]
-    public ActionResult Status()
+    public ActionResult<int> Scan(string directory)
     {
-        throw new NotImplementedException();
+        return _scanTasksManager.Start(directory);
+    }
+
+    [HttpGet]
+    public ActionResult<StatusResponse> Status(int id)
+    {
+        if (!_scanTasksManager.Exists(id))
+        {
+            NotFound();
+        }
+
+        if (!_scanTasksManager.IsFinished(id))
+        {
+            return new StatusResponse(false);
+        }
+
+        var scanResult = _scanTasksManager.GetResult(id);
+        return new StatusResponse(true, scanResult);
     }
 }
