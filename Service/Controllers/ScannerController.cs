@@ -27,7 +27,7 @@ public class ScannerController : ControllerBase
     {
         if (!_scanTasksManager.Exists(id))
         {
-            NotFound();
+            return NotFound();
         }
 
         if (!_scanTasksManager.IsFinished(id))
