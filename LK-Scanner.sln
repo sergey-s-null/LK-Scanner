@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "Util\Util.csproj", "{427935CE-7E13-4C33-A589-F60B1D67F8CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{93C5AD3F-D653-4526-A0D1-A659539E0A80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,5 +27,9 @@ Global
 		{427935CE-7E13-4C33-A589-F60B1D67F8CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{427935CE-7E13-4C33-A589-F60B1D67F8CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{427935CE-7E13-4C33-A589-F60B1D67F8CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93C5AD3F-D653-4526-A0D1-A659539E0A80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93C5AD3F-D653-4526-A0D1-A659539E0A80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93C5AD3F-D653-4526-A0D1-A659539E0A80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93C5AD3F-D653-4526-A0D1-A659539E0A80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
