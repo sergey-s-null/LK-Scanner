@@ -1,17 +1,15 @@
-﻿using Service.Entities.Abstract;
+﻿namespace Service.Responses.Models;
 
-namespace Service.Entities;
-
-public class ScanResult : IScanResult
+public class ScanResultModel
 {
     public int Processed { get; }
-    public IReadOnlyDictionary<SuspicionType, int> Detections { get; }
+    public IReadOnlyCollection<SuspicionDetectionModel> Detections { get; }
     public int Errors { get; }
     public TimeSpan ExecutionTime { get; }
 
-    public ScanResult(
+    public ScanResultModel(
         int processed,
-        IReadOnlyDictionary<SuspicionType, int> detections,
+        IReadOnlyCollection<SuspicionDetectionModel> detections,
         int errors,
         TimeSpan executionTime)
     {

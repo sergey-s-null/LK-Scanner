@@ -2,9 +2,9 @@
 
 public class SuspicionType
 {
-    public static readonly SuspicionType Js = new SuspicionType("JS");
-    public static readonly SuspicionType RmRf = new SuspicionType("rm -rf");
-    public static readonly SuspicionType Rundll32 = new SuspicionType("Rundll32");
+    public static readonly SuspicionType Js = new("JS");
+    public static readonly SuspicionType RmRf = new("rm -rf");
+    public static readonly SuspicionType Rundll32 = new("Rundll32");
 
     public string Name { get; }
 

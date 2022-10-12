@@ -1,8 +1,10 @@
 ﻿using System.Security;
 using Microsoft.AspNetCore.Mvc;
+using Service.Entities.Abstract;
 using Service.Exceptions;
 using Service.Requests;
 using Service.Responses;
+using Service.Responses.Models;
 using Service.Services.Abstract;
 
 namespace Service.Controllers;
@@ -59,11 +61,24 @@ public class ScannerController : ControllerBase
         try
         {
             var scanResult = await _scanTasksManager.GetResultAsync(request.TaskId);
-            return new StatusResponse(true, scanResult);
+            var scanResultModel = MapScanResult(scanResult);
+            return new StatusResponse(true, scanResultModel);
         }
         catch (DirectoryScanException e)
         {
             return new StatusResponse(true, errorMessage: e.Message);
         }
+    }
+
+    private static ScanResultModel MapScanResult(IScanResult scanResult)
+    {
+        return new ScanResultModel(
+            scanResult.Processed,
+            scanResult.Detections
+                .Select(x => new SuspicionDetectionModel(x.Key.Name, x.Value))
+                .ToList(),
+            scanResult.Errors,
+            scanResult.ExecutionTime
+        );
     }
 }

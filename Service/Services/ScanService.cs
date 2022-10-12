@@ -19,7 +19,7 @@ public class ScanService : IScanService
     public async Task<IScanResult> ScanDirectoryAsync(DirectoryInfo directory)
     {
         var fileCount = 0;
-        var detects = new Dictionary<SuspicionType, int>();
+        var detections = new Dictionary<SuspicionType, int>();
         var errorCount = 0;
         var stopwatch = Stopwatch.StartNew();
 
@@ -32,13 +32,13 @@ public class ScanService : IScanService
                 var suspicionType = await _fileScanner.ScanFileAsync(file);
                 if (suspicionType is not null)
                 {
-                    if (detects.ContainsKey(suspicionType))
+                    if (detections.ContainsKey(suspicionType))
                     {
-                        detects[suspicionType] += 1;
+                        detections[suspicionType] += 1;
                     }
                     else
                     {
-                        detects[suspicionType] = 1;
+                        detections[suspicionType] = 1;
                     }
                 }
             }
@@ -50,7 +50,7 @@ public class ScanService : IScanService
 
         stopwatch.Stop();
 
-        return new ScanResult(fileCount, detects, errorCount, stopwatch.Elapsed);
+        return new ScanResult(fileCount, detections, errorCount, stopwatch.Elapsed);
     }
 
     private static IEnumerable<FileInfo> EnumerateFilesRecursively(DirectoryInfo directory)

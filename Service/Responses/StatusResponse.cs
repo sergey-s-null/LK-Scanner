@@ -1,14 +1,17 @@
-﻿using Service.Entities.Abstract;
+﻿using Service.Responses.Models;
 
 namespace Service.Responses;
 
 public class StatusResponse
 {
     public bool IsFinished { get; }
-    public IScanResult? ScanResult { get; }
+    public ScanResultModel? ScanResult { get; }
     public string? ErrorMessage { get; }
 
-    public StatusResponse(bool isFinished, IScanResult? scanResult = null, string? errorMessage = null)
+    public StatusResponse(
+        bool isFinished,
+        ScanResultModel? scanResult = null,
+        string? errorMessage = null)
     {
         IsFinished = isFinished;
         ErrorMessage = errorMessage;
