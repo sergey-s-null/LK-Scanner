@@ -17,9 +17,9 @@ public class ScanTasksManager : IScanTasksManager
         _tasks = new List<Task<IScanResult>>();
     }
 
-    public int Start(string directory)
+    public int Start(DirectoryInfo directory)
     {
-        var task = _scanService.ScanDirectoryAsync(new DirectoryInfo(directory));
+        var task = _scanService.ScanDirectoryAsync(directory);
         _tasks.Add(task);
         return _tasks.Count - 1;
     }
@@ -39,13 +39,13 @@ public class ScanTasksManager : IScanTasksManager
         return _tasks[taskId].IsCompleted;
     }
 
-    public IScanResult GetResult(int taskId)
+    public async Task<IScanResult> GetResultAsync(int taskId)
     {
         if (!IsFinished(taskId))
         {
             throw new ScanTasksManagerException("Task with specified id is not finished.");
         }
 
-        return _tasks[taskId].Result;
+        return await _tasks[taskId];
     }
 }

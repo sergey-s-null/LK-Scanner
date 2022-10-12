@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security;
+using Microsoft.AspNetCore.Mvc;
 using Service.Exceptions;
+using Service.Requests;
 using Service.Responses;
 using Service.Services.Abstract;
 
@@ -16,28 +18,47 @@ public class ScannerController : ControllerBase
         _scanTasksManager = scanTasksManager;
     }
 
-    [HttpGet]
-    public ActionResult<int> Scan(string directory)
+    [HttpPost]
+    public ActionResult<StartScanningResponse> StartScanning(StartScanningRequest request)
     {
-        return _scanTasksManager.Start(directory);
+        DirectoryInfo directoryInfo;
+        try
+        {
+            directoryInfo = new DirectoryInfo(request.Directory);
+        }
+        catch (SecurityException e)
+        {
+            return new StartScanningResponse(false, errorMessage: e.Message);
+        }
+        catch (ArgumentException e)
+        {
+            return new StartScanningResponse(false, errorMessage: e.Message);
+        }
+        catch (PathTooLongException e)
+        {
+            return new StartScanningResponse(false, errorMessage: e.Message);
+        }
+
+        var taskId = _scanTasksManager.Start(directoryInfo);
+        return new StartScanningResponse(true, taskId);
     }
 
-    [HttpGet]
-    public ActionResult<StatusResponse> Status(int id)
+    [HttpPost]
+    public async Task<ActionResult<StatusResponse>> Status(StatusRequest request)
     {
-        if (!_scanTasksManager.Exists(id))
+        if (!_scanTasksManager.Exists(request.TaskId))
         {
             return NotFound();
         }
 
-        if (!_scanTasksManager.IsFinished(id))
+        if (!_scanTasksManager.IsFinished(request.TaskId))
         {
             return new StatusResponse(false);
         }
 
         try
         {
-            var scanResult = _scanTasksManager.GetResult(id);
+            var scanResult = await _scanTasksManager.GetResultAsync(request.TaskId);
             return new StatusResponse(true, scanResult);
         }
         catch (DirectoryScanException e)

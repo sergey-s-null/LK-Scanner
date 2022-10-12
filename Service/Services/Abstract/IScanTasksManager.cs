@@ -6,7 +6,7 @@ namespace Service.Services.Abstract;
 public interface IScanTasksManager
 {
     /// <returns>Id of started task.</returns>
-    int Start(string directory);
+    int Start(DirectoryInfo directory);
 
     bool Exists(int taskId);
 
@@ -15,5 +15,5 @@ public interface IScanTasksManager
 
     /// <exception cref="ScanTasksManagerException">Task does not exists or not finished.</exception>
     /// <exception cref="DirectoryScanException">Error occured on directory scan.</exception>
-    IScanResult GetResult(int taskId);
+    Task<IScanResult> GetResultAsync(int taskId);
 }

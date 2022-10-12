@@ -75,7 +75,7 @@ public class ScanService : IScanService
         {
             return directory.GetFiles();
         }
-        catch (DirectoryNotFoundException e)
+        catch (IOException e)
         {
             throw new DirectoryScanException("Error on list files in directory.", e);
         }
@@ -87,7 +87,7 @@ public class ScanService : IScanService
         {
             return directory.GetDirectories();
         }
-        catch (DirectoryNotFoundException e)
+        catch (IOException e)
         {
             throw new DirectoryScanException("Error on list subdirectories.", e);
         }
