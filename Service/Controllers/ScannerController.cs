@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Service.Exceptions;
 using Service.Responses;
 using Service.Services.Abstract;
 
@@ -34,7 +35,14 @@ public class ScannerController : ControllerBase
             return new StatusResponse(false);
         }
 
-        var scanResult = _scanTasksManager.GetResult(id);
-        return new StatusResponse(true, scanResult);
+        try
+        {
+            var scanResult = _scanTasksManager.GetResult(id);
+            return new StatusResponse(true, scanResult);
+        }
+        catch (DirectoryScanException e)
+        {
+            return new StatusResponse(true, errorMessage: e.Message);
+        }
     }
 }
