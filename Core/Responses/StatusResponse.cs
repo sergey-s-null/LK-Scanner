@@ -1,6 +1,6 @@
-﻿using Service.Responses.Models;
+﻿using Core.Responses.Models;
 
-namespace Service.Responses;
+namespace Core.Responses;
 
 public class StatusResponse
 {

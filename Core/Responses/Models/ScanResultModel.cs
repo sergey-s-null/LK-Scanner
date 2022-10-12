@@ -1,4 +1,4 @@
-﻿namespace Service.Responses.Models;
+﻿namespace Core.Responses.Models;
 
 public class ScanResultModel
 {

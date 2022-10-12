@@ -1,4 +1,4 @@
-﻿namespace Service.Requests;
+﻿namespace Core.Requests;
 
 public class StartScanningRequest
 {

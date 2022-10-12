@@ -1,10 +1,10 @@
 ﻿using System.Security;
+using Core.Requests;
+using Core.Responses;
+using Core.Responses.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Entities.Abstract;
 using Service.Exceptions;
-using Service.Requests;
-using Service.Responses;
-using Service.Responses.Models;
 using Service.Services.Abstract;
 
 namespace Service.Controllers;

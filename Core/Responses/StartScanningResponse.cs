@@ -1,4 +1,4 @@
-﻿namespace Service.Responses;
+﻿namespace Core.Responses;
 
 public class StartScanningResponse
 {
