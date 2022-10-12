@@ -6,7 +6,7 @@ public class StartScanningResponse
     public int? StartedTaskId { get; }
     public string? ErrorMessage { get; }
 
-    public StartScanningResponse(bool isStarted, int? startedTaskId = null, string errorMessage = null)
+    public StartScanningResponse(bool isStarted, int? startedTaskId = null, string? errorMessage = null)
     {
         IsStarted = isStarted;
         StartedTaskId = startedTaskId;

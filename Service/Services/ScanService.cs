@@ -42,7 +42,7 @@ public class ScanService : IScanService
                     }
                 }
             }
-            catch (FileScanException e)
+            catch (FileScanException)
             {
                 errorCount++;
             }
