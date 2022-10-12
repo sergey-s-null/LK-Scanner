@@ -5,6 +5,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{93AC98CA-B17D-49FD-AEAB-A4D0AE8D3FD5}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		paket.dependencies = paket.dependencies
 	EndProjectSection
 EndProject
 Global
