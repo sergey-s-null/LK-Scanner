@@ -50,7 +50,7 @@ public class ScanService : IScanService
 
         stopwatch.Stop();
 
-        return new ScanResult(fileCount, detections, errorCount, stopwatch.Elapsed);
+        return new ScanResult(directory.FullName, fileCount, detections, errorCount, stopwatch.Elapsed);
     }
 
     private static IEnumerable<FileInfo> EnumerateFilesRecursively(DirectoryInfo directory)

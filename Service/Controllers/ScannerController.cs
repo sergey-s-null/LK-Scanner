@@ -73,6 +73,7 @@ public class ScannerController : ControllerBase
     private static ScanResultModel MapScanResult(IScanResult scanResult)
     {
         return new ScanResultModel(
+            scanResult.DirectoryPath,
             scanResult.Processed,
             scanResult.Detections
                 .Select(x => new SuspicionDetectionModel(x.Key.Name, x.Value))

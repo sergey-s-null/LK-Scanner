@@ -88,7 +88,7 @@ public class CommandExecutor : ICommandExecutor
     {
         Console.WriteLine("====== Scan result ======");
 
-        // todo show directory
+        Console.WriteLine($"Directory: {scanResult.DirectoryPath}");
 
         Console.WriteLine($"Processed files: {scanResult.Processed}");
 
