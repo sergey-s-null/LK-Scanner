@@ -23,10 +23,11 @@ public class ScannerController : ControllerBase
     [HttpPost]
     public ActionResult<StartScanningResponse> StartScanning(StartScanningRequest request)
     {
+        var directoryExpanded = Environment.ExpandEnvironmentVariables(request.Directory);
         DirectoryInfo directoryInfo;
         try
         {
-            directoryInfo = new DirectoryInfo(request.Directory);
+            directoryInfo = new DirectoryInfo(directoryExpanded);
         }
         catch (SecurityException e)
         {
