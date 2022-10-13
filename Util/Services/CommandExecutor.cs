@@ -1,5 +1,7 @@
 ﻿using Core.Requests;
+using Core.Responses;
 using Core.Responses.Models;
+using Util.Exceptions;
 using Util.Services.Abstract;
 
 namespace Util.Services;
@@ -31,7 +33,17 @@ public class CommandExecutor : ICommandExecutor
 
     private async Task ExecuteScanCommandAsync(string directory)
     {
-        var startScanningResponse = await _remoteScannerService.StartScanningAsync(new StartScanningRequest(directory));
+        StartScanningResponse startScanningResponse;
+        try
+        {
+            startScanningResponse = await _remoteScannerService.StartScanningAsync(new StartScanningRequest(directory));
+        }
+        catch (RemoteServiceCallException e)
+        {
+            Console.WriteLine($"Error on remote service calling: {e.Message}");
+            return;
+        }
+
         if (startScanningResponse.ErrorMessage is not null)
         {
             Console.WriteLine($"Error on start task: {startScanningResponse.ErrorMessage}");
@@ -61,7 +73,16 @@ public class CommandExecutor : ICommandExecutor
             return;
         }
 
-        var statusResponse = await _remoteScannerService.GetScanningStatus(new StatusRequest(taskId));
+        StatusResponse statusResponse;
+        try
+        {
+            statusResponse = await _remoteScannerService.GetScanningStatus(new StatusRequest(taskId));
+        }
+        catch (RemoteServiceCallException e)
+        {
+            Console.WriteLine($"Error on remote service calling: {e.Message}");
+            return;
+        }
 
         if (!statusResponse.IsFinished)
         {
